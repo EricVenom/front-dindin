@@ -1,5 +1,7 @@
 import Header from '../../components/Header';
+import SignIn from '../SignIn';
 import SignUp from '../SignUp';
+
 import './style.css';
 
 export default function Main() {
@@ -7,7 +9,7 @@ export default function Main() {
         <>
             <Header></Header>
             <div className='container'>
-                <SignUp />
+                <SignIn />
             </div>
         </>
     )
