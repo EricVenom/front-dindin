@@ -102,3 +102,8 @@ button[type=submit] {
     width: 449px;
     margin-top: calc(84px - 31px);
 }
+
+.span-error {
+    margin-bottom: -45px;
+    color: red;
+}
