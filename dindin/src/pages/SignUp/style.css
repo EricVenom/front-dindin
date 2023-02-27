@@ -1,6 +1,8 @@
 .container-sign-up {
     width: 513px;
     height: 781px;
+
+    font-family: 'Rubik', sans-serif;
 }
 
 .container-sign-up form {
@@ -14,8 +16,11 @@
     background-color: white;
 }
 
-.container-sign-up h2 {
+.container-sign-up h4 {
     text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+
     margin-bottom: 42px;
 
     color: #7978D9;
@@ -46,4 +51,14 @@ input {
     border-radius: 5px;
 
     cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+a {
+    text-align: center;
+    color: #7978D9;
+
+    text-decoration: none;
 }

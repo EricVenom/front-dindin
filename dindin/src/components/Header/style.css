@@ -1,0 +1,33 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 105px;
+
+    width: 100vw;
+    height: 125px;
+
+    font-family: 'Rubik', sans-serif;
+}
+
+.header-left {
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    font-weight: 700;
+    font-size: 36px;
+    color: white;
+}
+
+.header-right {
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
