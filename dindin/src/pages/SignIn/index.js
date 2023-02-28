@@ -1,5 +1,6 @@
 import './style.css';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
@@ -25,7 +26,15 @@ export default function SignIn() {
             <div className='sign-in-left'>
                 <h1>Controle suas <span>finanças</span>, sem planilha chata.</h1>
                 <p>Organizar as suas finanças nunca foi tão fácil, com o DINDIN, você tem tudo num único lugar e em um clique de distância.</p>
-                <button type='button' className='btn-purple'>Cadastre-se</button>
+
+                <Link to='/signup'>
+                    <button
+                        type='button'
+                        className='btn-purple'
+                    >
+                        Cadastre-se
+                    </button>
+                </Link>
             </div>
 
             <div className='sign-in-right'>

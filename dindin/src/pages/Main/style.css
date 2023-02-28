@@ -13,5 +13,15 @@
     align-items: center;
     justify-content: center;
 
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+
     min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
 }
