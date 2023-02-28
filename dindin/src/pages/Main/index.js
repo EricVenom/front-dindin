@@ -12,7 +12,11 @@ export default function Main() {
             <div className='container'>
 
                 <Routes>
-                    <Route path='/login' element={<SignIn />} />
+                    <Route path='/'>
+                        <Route path='/' element={<SignIn />} />
+                        <Route path='/login' element={<SignIn />} />
+                    </Route>
+
                     <Route path='/signup' element={<SignUp />} />
                 </Routes>
             </div>
