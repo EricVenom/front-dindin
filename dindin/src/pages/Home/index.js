@@ -1,7 +1,8 @@
 import './style.css';
 import Filter from '../../assets/filter.svg';
 import RowItem from '../../components/RowItem';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import ModalAdd from '../../components/ModalAdd';
 
 export default function Home() {
 
@@ -12,7 +13,7 @@ export default function Home() {
             description: 'Venda dos brigadeiros',
             category: 'Pix',
             value: 10000,
-            entry: true
+            input: true
         },
         {
             date: '02/09/21',
@@ -20,17 +21,46 @@ export default function Home() {
             description: 'Saiu de casa',
             category: 'Lazer',
             value: 5850,
-            entry: false
+            input: false
         },
         {
-            date: '02/09/21',
-            weekday: 'Quinta',
-            description: 'Saiu de casa',
-            category: 'Lazer',
-            value: 5850,
-            entry: false
+            date: '03/09/21',
+            weekday: 'Sexta',
+            description: 'Compras',
+            category: 'Supermercado',
+            value: 10040,
+            input: false
         }
     ]);
+
+    const [inputs, setInputs] = useState([]);
+    const [inputSum, setInputSum] = useState(0);
+
+    const [outputs, setOutputs] = useState([]);
+    const [outputSum, setOutputSum] = useState(0);
+
+    const [activeModal, setActiveModal] = useState(false);
+
+    useEffect(() => {
+        const { inputList, outputList } = itemList.reduce((accumulator, item) => {
+            if (item.input) {
+                accumulator.inputList.push(item);
+            } else {
+                accumulator.outputList.push(item);
+            }
+            return accumulator;
+        }, { inputList: [], outputList: [] });
+
+        setInputs(inputList);
+        setOutputs(outputList);
+
+        const sumInput = inputList.reduce((acc, item) => acc + item.value, 0);
+        setInputSum(sumInput);
+
+        const sumOutput = outputList.reduce((acc, item) => acc + item.value, 0);
+        setOutputSum(sumOutput);
+
+    }, [itemList]);
 
     return (
         <div className='container-home'>
@@ -58,7 +88,7 @@ export default function Home() {
                             description={item.description}
                             category={item.category}
                             value={`R$ ${(item.value / 100).toFixed(2)}`}
-                            entry={item.entry}
+                            input={item.input}
                         />)}
 
                     </div>
@@ -78,8 +108,8 @@ export default function Home() {
                             </div>
 
                             <div>
-                                <span>0</span>
-                                <span>0</span>
+                                <span>{`R$ ${(inputSum / 100).toFixed(2)}`}</span>
+                                <span>{`R$ ${(outputSum / 100).toFixed(2)}`}</span>
                                 <span>0</span>
                             </div>
 
@@ -87,8 +117,14 @@ export default function Home() {
 
                     </div>
 
-                    <button type='button'>Adicionar Registro</button>
+                    <button
+                        type='button'
+                        onClick={() => setActiveModal(true)}
+                    >
+                        Adicionar Registro
+                    </button>
 
+                    {activeModal && <ModalAdd active={setActiveModal} />}
                 </div>
             </div>
         </div>

@@ -1,0 +1,77 @@
+.backdrop {
+    min-height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+
+    position: absolute;
+
+    padding: 79px 0;
+
+    background-color: rgba(61, 61, 61, 0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 61px 64px;
+    gap: 38px;
+
+    position: relative;
+
+    width: 611px;
+    height: 879px;
+
+    background-color: white;
+
+    border-radius: 20px;
+
+    font-family: 'Rubik';
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.modal img {
+    height: 26px;
+    position: absolute;
+
+    right: 64px;
+    top: 61px;
+
+    cursor: pointer;
+}
+
+label,
+input {
+    font-weight: 500;
+    font-size: 24px;
+
+    color: #484848;
+}
+
+input,
+select {
+    height: 63px;
+    border-radius: 5px;
+    border: 1px solid #555555;
+
+    padding: 12px;
+    margin-top: 8px;
+}
+
+select {
+    width: 100%;
+    background-color: white;
+}
+
+.modal button {
+    width: 236px;
+    margin: 0 auto;
+}
