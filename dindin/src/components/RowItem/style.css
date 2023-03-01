@@ -1,0 +1,24 @@
+.date {
+    font-weight: 700;
+}
+
+.icons {
+    display: flex;
+    gap: 20px;
+}
+
+.icons img {
+    height: 17px;
+    width: 17px;
+    cursor: pointer;
+}
+
+.entry {
+    color: #7B61FF;
+    font-weight: 700;
+}
+
+.spent {
+    color: #FA8C10;
+    font-weight: 700;
+}
