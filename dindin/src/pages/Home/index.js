@@ -14,6 +14,7 @@ export default function Home() {
                 <div className='home-left'>
 
                     <div className='table-container'>
+
                         <div className='table-row header'>
                             <span className='row-item'>Data</span>
                             <span className='row-item'>Dia da semana</span>
@@ -34,6 +35,7 @@ export default function Home() {
                                 <img src={Delete} alt='delete icon' />
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -55,6 +57,7 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
+                    <button type='button'>Adicionar Registro</button>
                 </div>
             </div>
         </div>
