@@ -1,7 +1,8 @@
+import { Route, Routes } from "react-router-dom";
 import Header from '../../components/Header';
+import Home from "../Home";
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
-import { Route, Routes } from "react-router-dom";
 
 import './style.css';
 
@@ -18,6 +19,8 @@ export default function Main() {
                     </Route>
 
                     <Route path='/signup' element={<SignUp />} />
+
+                    <Route path='/home' element={<Home />} />
                 </Routes>
             </div>
         </>
