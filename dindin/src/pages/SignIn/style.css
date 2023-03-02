@@ -104,6 +104,7 @@ button[type=submit] {
 }
 
 .span-error {
-    margin-bottom: -45px;
+    position: absolute;
+    bottom: 10%;
     color: red;
 }
