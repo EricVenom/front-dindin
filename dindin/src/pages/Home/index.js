@@ -8,6 +8,7 @@ export default function Home() {
 
     const [itemList, setItemList] = useState([
         {
+            id: 1,
             date: '01/09/21',
             weekday: 'Quarta',
             description: 'Venda dos brigadeiros',
@@ -16,6 +17,7 @@ export default function Home() {
             input: true
         },
         {
+            id: 2,
             date: '02/09/21',
             weekday: 'Quinta',
             description: 'Saiu de casa',
@@ -24,6 +26,7 @@ export default function Home() {
             input: false
         },
         {
+            id: 3,
             date: '03/09/21',
             weekday: 'Sexta',
             description: 'Compras',
@@ -62,6 +65,13 @@ export default function Home() {
 
     }, [itemList]);
 
+    function handleDeleteRow(id) {
+        const newList = [...itemList]
+        const itemIndex = newList.findIndex((item) => item.id === id);
+        newList.splice(itemIndex, 1)
+        setItemList(newList);
+    }
+
     return (
         <div className='container-home'>
             <div className='filter-container'>
@@ -83,12 +93,15 @@ export default function Home() {
                         </div>
 
                         {itemList.map((item) => <RowItem
+                            id={item.id}
+                            key={item.id}
                             date={item.date}
                             weekday={item.weekday}
                             description={item.description}
                             category={item.category}
                             value={`R$ ${(item.value / 100).toFixed(2)}`}
                             input={item.input}
+                            del={handleDeleteRow}
                         />)}
 
                     </div>
@@ -108,8 +121,8 @@ export default function Home() {
                             </div>
 
                             <div>
-                                <span>{`R$ ${(inputSum / 100).toFixed(2)}`}</span>
-                                <span>{`R$ ${(outputSum / 100).toFixed(2)}`}</span>
+                                <span className='input'>{`R$ ${(inputSum / 100).toFixed(2)}`}</span>
+                                <span className='output'>{`R$ ${(outputSum / 100).toFixed(2)}`}</span>
                                 <span>0</span>
                             </div>
 
