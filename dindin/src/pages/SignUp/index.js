@@ -31,8 +31,6 @@ export default function SignUp() {
                 senha: form.password
             });
 
-            localStorage.setItem('token', data.token);
-
             setError(false);
             setForm({
                 name: "",

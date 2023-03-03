@@ -6,7 +6,7 @@ import SignUp from '../SignUp';
 import './style.css';
 
 function ProtectedRoutes({ redirectTo }) {
-    const isAuth = true;
+    const isAuth = false;
     return isAuth ? <Outlet /> : <Navigate to={redirectTo} />;
 }
 
@@ -14,7 +14,7 @@ export default function Main() {
     return (
         <>
             <Header>
-
+                <span>this is a test</span>
             </Header>
 
             <div className='container'>

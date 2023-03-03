@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
+import api from '../../services/api';
 import './style.css';
 import Filter from '../../assets/filter.svg';
 import RowItem from '../../components/RowItem';
-import { useEffect, useState } from 'react';
 import ModalAdd from '../../components/ModalAdd';
 
 export default function Home() {
@@ -36,13 +37,35 @@ export default function Home() {
         }
     ]);
 
-    const [inputs, setInputs] = useState([]);
     const [inputSum, setInputSum] = useState(0);
 
-    const [outputs, setOutputs] = useState([]);
     const [outputSum, setOutputSum] = useState(0);
 
+    const [user, setUser] = useState({ id: '', nome: '', email: '' })
+
     const [activeModal, setActiveModal] = useState(false);
+
+    useEffect(() => {
+        async function getLoggedUser() {
+            try {
+                const { data } = await api.get('/usuario', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                setUser({
+                    id: data.id,
+                    nome: data.nome,
+                    email: data.email
+                })
+            } catch (error) {
+                return error.message
+            }
+        }
+
+        getLoggedUser();
+    }, [])
 
     useEffect(() => {
         const { inputList, outputList } = itemList.reduce((accumulator, item) => {
@@ -53,9 +76,6 @@ export default function Home() {
             }
             return accumulator;
         }, { inputList: [], outputList: [] });
-
-        setInputs(inputList);
-        setOutputs(outputList);
 
         const sumInput = inputList.reduce((acc, item) => acc + item.value, 0);
         setInputSum(sumInput);
