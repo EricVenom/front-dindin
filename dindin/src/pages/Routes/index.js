@@ -19,7 +19,6 @@ export default function MainRoutes() {
             <div className='container'>
 
                 <Routes>
-
                     <Route path='/' element={<SignIn />} />
 
                     <Route path='/signup' element={<SignUp />} />
