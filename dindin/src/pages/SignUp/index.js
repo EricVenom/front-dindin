@@ -1,6 +1,6 @@
 import './style.css';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 
 export default function SignUp() {
@@ -13,16 +13,13 @@ export default function SignUp() {
     })
 
     const [error, setError] = useState(false);
-    const [message, setMessage] = useState('As senhas não correspondem.');
+    const [message, setMessage] = useState('');
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        console.log('Clicou no submit')
-        handleAddUser()
-    }
+    const navigate = useNavigate();
 
     async function handleAddUser() {
         if (form.password !== form.confirmPassword) {
+            setMessage('Senhas não correspondem.')
             setError(true);
             return
         }
@@ -34,6 +31,8 @@ export default function SignUp() {
                 senha: form.password
             });
 
+            localStorage.setItem('token', data.token);
+
             setError(false);
             setForm({
                 name: "",
@@ -42,11 +41,18 @@ export default function SignUp() {
                 confirmPassword: ""
             })
 
-            //adicionar redirecionamento para login!!!
+            setTimeout(() => {
+                navigate("/login");
+            }, 1500)
 
         } catch (error) {
             setMessage(error.response.data.mensagem)
         }
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        handleAddUser()
     }
 
     return (
