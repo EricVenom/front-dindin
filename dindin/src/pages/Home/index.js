@@ -41,31 +41,7 @@ export default function Home() {
 
     const [outputSum, setOutputSum] = useState(0);
 
-    const [user, setUser] = useState({ id: '', nome: '', email: '' })
-
     const [activeModal, setActiveModal] = useState(false);
-
-    useEffect(() => {
-        async function getLoggedUser() {
-            try {
-                const { data } = await api.get('/usuario', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-
-                setUser({
-                    id: data.id,
-                    nome: data.nome,
-                    email: data.email
-                })
-            } catch (error) {
-                return error.message
-            }
-        }
-
-        getLoggedUser();
-    }, [])
 
     useEffect(() => {
         const { inputList, outputList } = itemList.reduce((accumulator, item) => {

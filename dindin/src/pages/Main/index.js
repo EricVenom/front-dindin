@@ -1,20 +1,47 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from 'react';
+
+import api from '../../services/api';
 import Header from '../../components/Header';
 import Home from "../Home";
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
 import './style.css';
 
-function ProtectedRoutes({ redirectTo }) {
-    const isAuth = false;
-    return isAuth ? <Outlet /> : <Navigate to={redirectTo} />;
-}
-
 export default function Main() {
+    const [user, setUser] = useState({ id: '', nome: '', email: '' })
+
+    useEffect(() => {
+        async function getLoggedUser() {
+            try {
+                const { data } = await api.get('/usuario', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                setUser({
+                    id: data.id,
+                    nome: data.nome,
+                    email: data.email
+                })
+            } catch (error) {
+                return error.message
+            }
+        }
+
+        getLoggedUser();
+    }, [])
+
+    function ProtectedRoutes({ redirectTo }) {
+        return user.id ? <Outlet /> : <Navigate to={redirectTo} />;
+    }
+
+
     return (
         <>
             <Header>
-                <span>this is a test</span>
+                <span>{user.nome}</span>
             </Header>
 
             <div className='container'>
