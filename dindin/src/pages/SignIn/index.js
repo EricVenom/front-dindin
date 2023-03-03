@@ -1,24 +1,39 @@
 import './style.css';
-import api from '../../services/api';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../../services/api';
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log('Clicou no enviar')
-        if (!email || !password) {
-            setError(true)
-        }
+        try {
 
-        if (email && password) {
             setError(false)
             setEmail('')
             setPassword('')
+            await handleLogin()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function handleLogin() {
+        try {
+            const { data } = await api.post('/login', {
+                email,
+                senha: password
+            });
+
+            console.log(data.token)
+        } catch (error) {
+            setError(true)
+            setErrorMessage(error.response.data.mensagem)
         }
     }
 
@@ -59,7 +74,7 @@ export default function SignIn() {
                         />
                     </label>
 
-                    {error && <span className='span-error'>Forneça informações válidas.</span>}
+                    {error && <span className='span-error'>{errorMessage}</span>}
 
                     <button type='submit' className='btn-purple'>Entrar</button>
                 </form>

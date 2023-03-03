@@ -1,15 +1,22 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Header from '../../components/Header';
 import Home from "../Home";
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
-
 import './style.css';
+
+function ProtectedRoutes({ redirectTo }) {
+    const isAuth = true;
+    return isAuth ? <Outlet /> : <Navigate to={redirectTo} />;
+}
 
 export default function Main() {
     return (
         <>
-            <Header></Header>
+            <Header>
+
+            </Header>
+
             <div className='container'>
 
                 <Routes>
@@ -20,7 +27,11 @@ export default function Main() {
 
                     <Route path='/signup' element={<SignUp />} />
 
-                    <Route path='/home' element={<Home />} />
+                    <Route element={<ProtectedRoutes redirectTo={'/login'} />}>
+                        <Route path='/home' element={<Home />} />
+                    </Route>
+
+                    <Route path='*' element={<h1>404 - Not found</h1>} />
                 </Routes>
             </div>
         </>
