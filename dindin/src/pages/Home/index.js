@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import api from '../../services/api';
 import './style.css';
 import Filter from '../../assets/filter.svg';
 import RowItem from '../../components/RowItem';
 import ModalAdd from '../../components/ModalAdd';
 
-export default function Home() {
+export default function Home({ user }) {
 
     const [itemList, setItemList] = useState([
         {

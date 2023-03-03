@@ -55,7 +55,7 @@ export default function Main() {
                     <Route path='/signup' element={<SignUp />} />
 
                     <Route element={<ProtectedRoutes redirectTo={'/login'} />}>
-                        <Route path='/home' element={<Home />} />
+                        <Route path='/home' element={<Home user={user} />} />
                     </Route>
 
                     <Route path='*' element={<h1>404 - Not found</h1>} />
