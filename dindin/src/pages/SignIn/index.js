@@ -1,4 +1,5 @@
 import './style.css';
+import api from '../../services/api';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ export default function SignIn() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
         console.log('Clicou no enviar')
         if (!email || !password) {
@@ -42,14 +43,16 @@ export default function SignIn() {
                     <h3>Login</h3>
                     <label>E-mail
                         <input
+                            name='email'
                             type='email'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </label>
 
-                    <label>Password
+                    <label>Senha
                         <input
+                            name='password'
                             type='password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
