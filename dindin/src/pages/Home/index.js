@@ -3,8 +3,9 @@ import './style.css';
 import Filter from '../../assets/filter.svg';
 import RowItem from '../../components/RowItem';
 import ModalAdd from '../../components/ModalAdd';
+import api from '../../services/api';
 
-export default function Home({ user }) {
+export default function Home() {
 
     const [itemList, setItemList] = useState([
         {
@@ -41,6 +42,30 @@ export default function Home({ user }) {
     const [outputSum, setOutputSum] = useState(0);
 
     const [activeModal, setActiveModal] = useState(false);
+
+    const [user, setUser] = useState({ id: '', nome: '', email: '' })
+
+    useEffect(() => {
+        async function getLoggedUser() {
+            try {
+                const { data } = await api.get('/usuario', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                console.log(data)
+                setUser({
+                    id: data.id,
+                    nome: data.nome,
+                    email: data.email
+                })
+            } catch (error) {
+                return error.message
+            }
+        }
+
+        getLoggedUser();
+    }, [])
 
     useEffect(() => {
         const { inputList, outputList } = itemList.reduce((accumulator, item) => {

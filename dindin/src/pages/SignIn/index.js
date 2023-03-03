@@ -1,6 +1,7 @@
 import './style.css';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { setItem } from '../../utils/storage';
 import api from '../../services/api';
 
 export default function SignIn() {
@@ -15,31 +16,16 @@ export default function SignIn() {
     async function handleSubmit(e) {
         e.preventDefault()
         try {
-            setError(false)
-            setEmail('')
-            setPassword('')
-            await handleLogin()
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    async function handleLogin() {
-        try {
             const { data } = await api.post('/login', {
                 email,
                 senha: password
-            }, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
             });
 
-            localStorage.setItem('token', data.token);
+            setItem('token', data.token)
 
             setTimeout(() => {
                 navigate('/home')
-            }, 1500);
+            }, 500);
 
         } catch (error) {
             setError(true)

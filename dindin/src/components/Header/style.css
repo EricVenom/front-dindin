@@ -30,4 +30,22 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    gap: 7px;
+
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+}
+
+.header-right img {
+    cursor: pointer;
+}
+
+.header-right img:hover {
+    transform: scale(1.05);
+}
+
+.header-right img:last-of-type {
+    margin-left: calc(16px - 7px);
 }

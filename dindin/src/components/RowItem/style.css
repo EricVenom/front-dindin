@@ -13,6 +13,10 @@
     cursor: pointer;
 }
 
+.icons img:hover {
+    transform: scale(1.1);
+}
+
 .input {
     color: #7B61FF;
     font-weight: 700;
@@ -66,4 +70,8 @@
 
     border: none;
     border-radius: 4px;
+}
+
+.table-row:hover {
+    background-color: rgba(61, 61, 61, 0.05);
 }
