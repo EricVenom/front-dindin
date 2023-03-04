@@ -3,7 +3,7 @@ import Delete from '../../assets/delete.svg';
 import Edit from '../../assets/edit.svg';
 import { useState } from 'react';
 
-export default function RowItem({ id, date, weekday, description, category, value, input, del }) {
+export default function RowItem({ id, date, weekday, description, category, value, input, del, active }) {
 
     const [deleteRow, setDeleteRow] = useState(false);
 
@@ -14,8 +14,14 @@ export default function RowItem({ id, date, weekday, description, category, valu
             <span className='row-item'>{description}</span>
             <span className='row-item'>{category}</span>
             <span className={`row-item ${input ? 'input' : 'output'}`}>{value}</span>
+
             <div className='row-item icons'>
-                <img src={Edit} alt='edit input icon' />
+                <img
+                    src={Edit}
+                    alt='edit input icon'
+                    onClick={() => active(true)}
+                />
+
                 <img
                     src={Delete}
                     alt='delete icon'

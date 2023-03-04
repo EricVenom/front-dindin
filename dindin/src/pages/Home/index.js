@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './style.css';
 import Filter from '../../assets/filter.svg';
 import RowItem from '../../components/RowItem';
-import ModalAdd from '../../components/ModalAdd';
+import ModalForm from '../../components/ModalForm';
 import api from '../../services/api';
 
 export default function Home() {
@@ -42,6 +42,8 @@ export default function Home() {
     const [outputSum, setOutputSum] = useState(0);
 
     const [activeModal, setActiveModal] = useState(false);
+
+    const [editModal, setEditModal] = useState(false);
 
     const [user, setUser] = useState({ id: '', nome: '', email: '' })
 
@@ -122,6 +124,7 @@ export default function Home() {
                             value={`R$ ${(item.value / 100).toFixed(2)}`}
                             input={item.input}
                             del={handleDeleteRow}
+                            active={setEditModal}
                         />)}
 
                     </div>
@@ -157,7 +160,8 @@ export default function Home() {
                         Adicionar Registro
                     </button>
 
-                    {activeModal && <ModalAdd active={setActiveModal} />}
+                    {activeModal && <ModalForm active={setActiveModal} title='Adicionar Registro' add={true} />}
+                    {editModal && <ModalForm active={setEditModal} title='Editar Registro' add={false} />}
                 </div>
             </div>
         </div>
