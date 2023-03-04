@@ -1,5 +1,5 @@
 .backdrop {
-    min-height: 100%;
+    min-height: calc(100vh + 125px);
     width: 100%;
     top: 0;
     left: 0;
@@ -64,7 +64,10 @@ section label>input {
 section label>input+div {
     background-color: #B9B9B9;
     height: 60px;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 10px;
+
+    margin-top: calc(-52px);
+
     display: flex;
 
     align-items: center;
@@ -72,6 +75,20 @@ section label>input+div {
 
     font-size: 14px;
     color: white;
+
+    cursor: pointer;
+}
+
+section label>input+div:hover {
+    opacity: 0.8;
+}
+
+section label>.input:checked+div {
+    background-color: #3A9FF1;
+}
+
+section label>.output:checked+div {
+    background-color: #FF576B;
 }
 
 label,
