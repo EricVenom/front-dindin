@@ -40,7 +40,7 @@ export default function SignUp() {
             })
 
             setTimeout(() => {
-                navigate("/login");
+                navigate("/");
             }, 1500)
 
         } catch (error) {
@@ -97,7 +97,7 @@ export default function SignUp() {
 
                 <button type='submit'>Cadastrar</button>
 
-                <Link to='/login'>Já tem cadastro? Clique aqui!</Link>
+                <Link to='/'>Já tem cadastro? Clique aqui!</Link>
             </form>
         </div>
     )

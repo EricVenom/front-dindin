@@ -16,7 +16,7 @@ export default function Header({ user }) {
     return (
         <header>
             <div className='header-left'>
-                <img src={logo} alt='logo' onClick={() => navigate('/home')} />
+                <img src={logo} alt='logo' onClick={() => navigate('/')} />
                 <h4>Dindin</h4>
             </div>
 
