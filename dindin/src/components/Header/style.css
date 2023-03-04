@@ -24,6 +24,11 @@ header {
     color: white;
 }
 
+.header-left img,
+h4 {
+    cursor: pointer;
+}
+
 .header-right {
     width: 50%;
 

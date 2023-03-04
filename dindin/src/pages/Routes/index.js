@@ -5,21 +5,29 @@ import SignIn from '../SignIn';
 import SignUp from '../SignUp';
 import './style.css';
 
-
 export default function MainRoutes() {
     function ProtectedRoutes({ redirectTo }) {
         const isLoggedIn = localStorage.token
         return isLoggedIn ? <Outlet /> : <Navigate to={redirectTo} />;
     }
 
+    function ProtectedHome({ redirectTo }) {
+        const isLoggedIn = localStorage.token
+        return !isLoggedIn ? <Outlet /> : <Navigate to={redirectTo} />;
+    }
+
     return (
         <>
-            <Header user='hi' />
+            <Header user='hi'>
+
+            </Header>
 
             <div className='container'>
 
                 <Routes>
-                    <Route path='/' element={<SignIn />} />
+                    <Route element={<ProtectedHome redirectTo={'/home'} />}>
+                        <Route path='/' element={<SignIn />} />
+                    </Route>
 
                     <Route path='/signup' element={<SignUp />} />
 

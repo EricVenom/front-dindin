@@ -3,10 +3,9 @@ import logo from '../../assets/logo.svg';
 import logout from '../../assets/logout.svg';
 import profile from '../../assets/profile.svg';
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header({ user }) {
-    const location = useLocation();
     const navigate = useNavigate();
 
     function handleLogout() {
@@ -17,12 +16,12 @@ export default function Header({ user }) {
     return (
         <header>
             <div className='header-left'>
-                <img src={logo} alt='logo' />
+                <img src={logo} alt='logo' onClick={() => navigate('/home')} />
                 <h4>Dindin</h4>
             </div>
 
             <div className='header-right'>
-                {location.pathname === '/home' &&
+                {localStorage.getItem('token') &&
                     <>
                         <img
                             src={profile}
@@ -37,6 +36,6 @@ export default function Header({ user }) {
                     </>
                 }
             </div>
-        </header>
+        </header >
     )
 }
