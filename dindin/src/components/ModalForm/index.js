@@ -29,12 +29,12 @@ export default function ModalAdd({ active, title, add }) {
 
                 <section>
                     <label>
-                        <input type='radio' value='input' checked='checked' className='input' />
+                        <input type='radio' name='transaction' value='input' checked='checked' className='input' />
                         <div>Entrada</div>
                     </label>
 
                     <label>
-                        <input type='radio' value='output' className='output' />
+                        <input type='radio' name='transaction' value='output' className='output' />
                         <div>Saida</div>
                     </label>
                 </section>
