@@ -21,7 +21,7 @@ export default function MainRoutes() {
 
     return (
         <>
-            <Header user={loggedUser} />
+            <Header username={loggedUser} />
 
             <div className='container'>
 

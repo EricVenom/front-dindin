@@ -98,11 +98,6 @@ h1 span {
     margin-top: 8px;
 }
 
-button[type=submit] {
-    width: 449px;
-    margin-top: calc(84px - 31px);
-}
-
 .span-error {
     position: absolute;
     bottom: 10%;
