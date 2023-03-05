@@ -27,7 +27,7 @@ export default function Header({ user }) {
                             src={profile}
                             alt='profile icon'
                         />
-                        <span>{user.nome}</span>
+                        <span>{user}</span>
                         <img
                             src={logout}
                             alt='logout icon'

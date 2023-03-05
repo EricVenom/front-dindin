@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Header from '../../components/Header';
 import Home from "../Home";
@@ -16,9 +17,11 @@ export default function MainRoutes() {
         return !isLoggedIn ? <Outlet /> : <Navigate to={redirectTo} />;
     }
 
+    const [loggedUser, setLoggedUser] = useState('');
+
     return (
         <>
-            <Header user='hi' />
+            <Header user={loggedUser} />
 
             <div className='container'>
 
@@ -30,7 +33,7 @@ export default function MainRoutes() {
                     <Route path='/signup' element={<SignUp />} />
 
                     <Route element={<ProtectedRoutes redirectTo={'/'} />}>
-                        <Route path='/home' element={<Home />} />
+                        <Route path='/home' element={<Home loggedUser={setLoggedUser} />} />
                     </Route>
 
                     <Route path='*' element={<h1 style={{ color: 'white' }}>404 - Not found</h1>} />

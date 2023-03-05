@@ -5,7 +5,7 @@ import RowItem from '../../components/RowItem';
 import ModalForm from '../../components/ModalForm';
 import api from '../../services/api';
 
-export default function Home() {
+export default function Home({ loggedUser }) {
 
     const [itemList, setItemList] = useState([
         {
@@ -50,22 +50,23 @@ export default function Home() {
     useEffect(() => {
         async function getLoggedUser() {
             try {
-                const { data } = await api.get('/usuario', {
+                const { data: user } = await api.get('/usuario', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                console.log(data)
+
                 setUser({
-                    id: data.id,
-                    nome: data.nome,
-                    email: data.email
+                    id: user.id,
+                    nome: user.nome,
+                    email: user.email
                 })
+
+                loggedUser(user.nome)
             } catch (error) {
                 return error.message
             }
         }
-
         getLoggedUser();
     }, [])
 
