@@ -16,6 +16,7 @@ export default function Header({ username }) {
     }
 
     const [activeModal, setActiveModal] = useState(false);
+    const [user, setUser] = useState(username);
 
     return (
         <header>
@@ -32,7 +33,7 @@ export default function Header({ username }) {
                             alt='profile icon'
                             onClick={() => setActiveModal(true)}
                         />
-                        <span>{username}</span>
+                        <span>{user}</span>
                         <img
                             src={logout}
                             alt='logout icon'
@@ -41,7 +42,7 @@ export default function Header({ username }) {
                     </>
                 }
             </div>
-            {activeModal && <EditProfile active={setActiveModal} />}
+            {activeModal && <EditProfile active={setActiveModal} setUser={setUser} />}
         </header >
     )
 }
