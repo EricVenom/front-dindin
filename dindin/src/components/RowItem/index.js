@@ -13,7 +13,7 @@ export default function RowItem({ id, date, weekday, description, category, valu
             <span className='row-item'>{weekday}</span>
             <span className='row-item'>{description}</span>
             <span className='row-item'>{category}</span>
-            <span className={`row-item ${input ? 'input' : 'output'}`}>{value}</span>
+            <span className={`row-item ${input === 'entrada' ? 'input' : 'output'}`}>{value}</span>
 
             <div className='row-item icons'>
                 <img

@@ -5,11 +5,25 @@ import api from '../../services/api';
 
 export default function ModalAdd({ active, title, add }) {
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
         if (add) {
-            console.log('adding registry')
-            //calls add endpoint
+            try {
+                const { data } = await api.post('/transacao', {
+                    tipo: form.tipo,
+                    descricao: form.descricao,
+                    valor: form.valor,
+                    data: form.data,
+                    categoria_id: form.categoria_id
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                console.log(data)
+            } catch (error) {
+                console.log(error)
+            }
         }
 
         if (!add) {
@@ -19,6 +33,14 @@ export default function ModalAdd({ active, title, add }) {
     }
 
     const [categories, setCategories] = useState([])
+
+    const [form, setForm] = useState({
+        tipo: 'saida',
+        descricao: '',
+        valor: '',
+        data: '',
+        categoria_id: '1'
+    })
 
     useEffect(() => {
         async function getCategories() {
@@ -54,20 +76,42 @@ export default function ModalAdd({ active, title, add }) {
 
                 <section>
                     <label>
-                        <input type='radio' name='transaction' value='entrada' className='input' />
+                        <input
+                            type='radio'
+                            name='transaction'
+                            value='entrada'
+                            className='input'
+                            onChange={(e) => setForm({ ...form, tipo: e.target.value })}
+                        />
                         <div>Entrada</div>
                     </label>
 
                     <label>
-                        <input type='radio' name='transaction' value='saida' className='output' checked='checked' />
+                        <input
+                            type='radio'
+                            name='transaction'
+                            value='saida'
+                            className='output'
+                            onChange={(e) => setForm({ ...form, tipo: e.target.value })}
+                            defaultChecked
+                        />
                         <div>Saida</div>
                     </label>
                 </section>
 
-                <label>Valor <input type='number' /></label>
+                <label>Valor
+                    <input
+                        type='number'
+                        value={form.valor}
+                        onChange={(e) => setForm({ ...form, valor: e.target.value })}
+                    />
+                </label>
 
                 <label>Categoria
-                    <select>
+                    <select
+                        onChange={(e) => setForm({ ...form, categoria_id: e.target.value })}
+                    >
+
                         {categories.map((category) => <option
                             value={category.id}
                             key={category.id}
@@ -77,9 +121,21 @@ export default function ModalAdd({ active, title, add }) {
                     </select>
                 </label>
 
-                <label>Data <input type='date' /></label>
+                <label>Data
+                    <input
+                        type='date'
+                        value={form.data}
+                        onChange={(e) => setForm({ ...form, data: e.target.value })}
+                    />
+                </label>
 
-                <label>Descrição <input type='text' /></label>
+                <label>Descrição
+                    <input
+                        type='text'
+                        value={form.descricao}
+                        onChange={(e) => setForm({ ...form, descricao: e.target.value })}
+                    />
+                </label>
 
                 <button type='submit'>Confirmar</button>
             </form>

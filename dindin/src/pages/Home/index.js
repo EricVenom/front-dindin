@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { format, parseISO } from 'date-fns';
 import './style.css';
 import Filter from '../../assets/filter.svg';
 import RowItem from '../../components/RowItem';
@@ -45,7 +46,7 @@ export default function Home({ loggedUser }) {
 
     const [editModal, setEditModal] = useState(false);
 
-    const [user, setUser] = useState({ id: '', nome: '', email: '' })
+    const [user, setUser] = useState({ id: '', nome: '', email: '', transacoes: [] })
 
     useEffect(() => {
         async function getLoggedUser() {
@@ -56,12 +57,18 @@ export default function Home({ loggedUser }) {
                     }
                 });
 
+                const { data: transactions } = await api.get('/transacao', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+
                 setUser({
                     id: user.id,
                     nome: user.nome,
-                    email: user.email
+                    email: user.email,
+                    transacoes: transactions
                 })
-
                 loggedUser(user.nome)
             } catch (error) {
                 return error.message
@@ -115,15 +122,15 @@ export default function Home({ loggedUser }) {
                             <div className='row-item'></div>
                         </div>
 
-                        {itemList.map((item) => <RowItem
+                        {user.transacoes.map((item) => <RowItem
                             id={item.id}
                             key={item.id}
-                            date={item.date}
-                            weekday={item.weekday}
-                            description={item.description}
-                            category={item.category}
-                            value={`R$ ${(item.value / 100).toFixed(2)}`}
-                            input={item.input}
+                            date={format(parseISO(item.data), 'dd/MM/yyyy')}
+                            weekday={format(parseISO(item.data), 'eeee')}
+                            description={item.descricao}
+                            category={item.categoria_nome}
+                            value={`R$ ${(item.valor / 100).toFixed(2)}`}
+                            input={item.tipo}
                             del={handleDeleteRow}
                             active={setEditModal}
                         />)}
