@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EditProfile from '../EditProfile';
 
-export default function Header({ username }) {
+export default function Header({ username, updateUser }) {
     const navigate = useNavigate();
 
     function handleLogout() {
@@ -16,7 +16,6 @@ export default function Header({ username }) {
     }
 
     const [activeModal, setActiveModal] = useState(false);
-    const [user, setUser] = useState(username);
 
     return (
         <header>
@@ -33,7 +32,7 @@ export default function Header({ username }) {
                             alt='profile icon'
                             onClick={() => setActiveModal(true)}
                         />
-                        <span>{user}</span>
+                        <span>{username}</span>
                         <img
                             src={logout}
                             alt='logout icon'
@@ -42,7 +41,7 @@ export default function Header({ username }) {
                     </>
                 }
             </div>
-            {activeModal && <EditProfile active={setActiveModal} setUser={setUser} />}
+            {activeModal && <EditProfile active={setActiveModal} setUser={updateUser} />}
         </header >
     )
 }

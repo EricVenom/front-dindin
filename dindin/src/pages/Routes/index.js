@@ -22,7 +22,7 @@ export default function MainRoutes() {
 
     return (
         <div className={`container ${location.pathname === '/home' && 'logged'}`}>
-            <Header username={loggedUser} />
+            <Header username={loggedUser} updateUser={setLoggedUser} />
 
             <Routes>
                 <Route element={<ProtectedHome redirectTo={'/home'} />}>
