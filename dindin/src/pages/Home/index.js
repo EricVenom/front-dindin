@@ -78,8 +78,8 @@ export default function Home({ loggedUser }) {
     }, [])
 
     useEffect(() => {
-        const { inputList, outputList } = itemList.reduce((accumulator, item) => {
-            if (item.input) {
+        const { inputList, outputList } = user.transacoes.reduce((accumulator, item) => {
+            if (item.tipo === 'entrada') {
                 accumulator.inputList.push(item);
             } else {
                 accumulator.outputList.push(item);
@@ -87,19 +87,19 @@ export default function Home({ loggedUser }) {
             return accumulator;
         }, { inputList: [], outputList: [] });
 
-        const sumInput = inputList.reduce((acc, item) => acc + item.value, 0);
+        const sumInput = inputList.reduce((acc, item) => acc + item.valor, 0);
         setInputSum(sumInput);
 
-        const sumOutput = outputList.reduce((acc, item) => acc + item.value, 0);
+        const sumOutput = outputList.reduce((acc, item) => acc + item.valor, 0);
         setOutputSum(sumOutput);
 
-    }, [itemList]);
+    }, [user.transacoes]);
 
     function handleDeleteRow(id) {
-        const newList = [...itemList]
+        const newList = [...user.transacoes]
         const itemIndex = newList.findIndex((item) => item.id === id);
         newList.splice(itemIndex, 1)
-        setItemList(newList);
+        setUser({ ...user, transacoes: newList });
     }
 
     return (
@@ -154,7 +154,7 @@ export default function Home({ loggedUser }) {
                             <div>
                                 <span className='input'>{`R$ ${(inputSum / 100).toFixed(2)}`}</span>
                                 <span className='output'>{`R$ ${(outputSum / 100).toFixed(2)}`}</span>
-                                <span>0</span>
+                                <span>{((inputSum / 100) - (outputSum / 100)).toFixed(2)}</span>
                             </div>
 
                         </div>
