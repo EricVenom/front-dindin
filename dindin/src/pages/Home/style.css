@@ -124,8 +124,14 @@
     font-weight: 700;
 }
 
+.description-balance div:last-of-type span:last-of-type {
+    font-weight: 500;
+    color: #3A9FF1;
+}
+
 .description-balance span:last-of-type {
     margin-top: calc(35px - 12px);
+    font-weight: 700;
 }
 
 .home-right button {

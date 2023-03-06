@@ -154,7 +154,7 @@ export default function Home({ loggedUser }) {
                             <div>
                                 <span className='input'>{`R$ ${(inputSum / 100).toFixed(2)}`}</span>
                                 <span className='output'>{`R$ ${(outputSum / 100).toFixed(2)}`}</span>
-                                <span>{((inputSum / 100) - (outputSum / 100)).toFixed(2)}</span>
+                                <span>{`R$ ${((inputSum / 100) - (outputSum / 100)).toFixed(2)}`}</span>
                             </div>
 
                         </div>
