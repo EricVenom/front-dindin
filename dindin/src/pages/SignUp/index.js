@@ -25,7 +25,7 @@ export default function SignUp() {
         }
 
         try {
-            const { data } = await api.post('/usuario', {
+            await api.post('/usuario', {
                 nome: form.name,
                 email: form.email,
                 senha: form.password

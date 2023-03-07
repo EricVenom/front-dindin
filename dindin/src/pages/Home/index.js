@@ -7,45 +7,11 @@ import ModalForm from '../../components/ModalForm';
 import api from '../../services/api';
 
 export default function Home({ loggedUser }) {
-
-    const [itemList, setItemList] = useState([
-        {
-            id: 1,
-            date: '01/09/21',
-            weekday: 'Quarta',
-            description: 'Venda dos brigadeiros',
-            category: 'Pix',
-            value: 10000,
-            input: true
-        },
-        {
-            id: 2,
-            date: '02/09/21',
-            weekday: 'Quinta',
-            description: 'Saiu de casa',
-            category: 'Lazer',
-            value: 5850,
-            input: false
-        },
-        {
-            id: 3,
-            date: '03/09/21',
-            weekday: 'Sexta',
-            description: 'Compras',
-            category: 'Supermercado',
-            value: 10040,
-            input: false
-        }
-    ]);
-
     const [inputSum, setInputSum] = useState(0);
-
     const [outputSum, setOutputSum] = useState(0);
-
     const [activeModal, setActiveModal] = useState(false);
-
     const [editModal, setEditModal] = useState(false);
-
+    const [editId, setId] = useState('');
     const [user, setUser] = useState({ id: '', nome: '', email: '', transacoes: [] })
 
     useEffect(() => {
@@ -75,7 +41,7 @@ export default function Home({ loggedUser }) {
             }
         }
         getLoggedUser();
-    }, [])
+    }, [activeModal, editModal])
 
     useEffect(() => {
         const { inputList, outputList } = user.transacoes.reduce((accumulator, item) => {
@@ -95,11 +61,21 @@ export default function Home({ loggedUser }) {
 
     }, [user.transacoes]);
 
-    function handleDeleteRow(id) {
+    async function handleDeleteRow(id) {
         const newList = [...user.transacoes]
         const itemIndex = newList.findIndex((item) => item.id === id);
         newList.splice(itemIndex, 1)
         setUser({ ...user, transacoes: newList });
+
+        try {
+            await api.delete(`transacao/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 
     return (
@@ -129,10 +105,11 @@ export default function Home({ loggedUser }) {
                             weekday={format(parseISO(item.data), 'eeee')}
                             description={item.descricao}
                             category={item.categoria_nome}
-                            value={`R$ ${(item.valor / 100).toFixed(2)}`}
+                            value={`R$ ${(item.valor).toFixed(2)}`}
                             input={item.tipo}
                             del={handleDeleteRow}
                             active={setEditModal}
+                            setId={setId}
                         />)}
 
                     </div>
@@ -152,9 +129,9 @@ export default function Home({ loggedUser }) {
                             </div>
 
                             <div>
-                                <span className='input'>{`R$ ${(inputSum / 100).toFixed(2)}`}</span>
-                                <span className='output'>{`R$ ${(outputSum / 100).toFixed(2)}`}</span>
-                                <span>{`R$ ${((inputSum / 100) - (outputSum / 100)).toFixed(2)}`}</span>
+                                <span className='input'>{`R$ ${(inputSum).toFixed(2)}`}</span>
+                                <span className='output'>{`R$ ${(outputSum).toFixed(2)}`}</span>
+                                <span>{`R$ ${((inputSum) - (outputSum)).toFixed(2)}`}</span>
                             </div>
 
                         </div>
@@ -169,7 +146,7 @@ export default function Home({ loggedUser }) {
                     </button>
 
                     {activeModal && <ModalForm active={setActiveModal} title='Adicionar Registro' add={true} />}
-                    {editModal && <ModalForm active={setEditModal} title='Editar Registro' add={false} />}
+                    {editModal && <ModalForm active={setEditModal} title='Editar Registro' add={false} id={editId} />}
                 </div>
             </div>
         </div>

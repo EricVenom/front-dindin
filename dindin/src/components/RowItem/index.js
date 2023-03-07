@@ -3,7 +3,7 @@ import Delete from '../../assets/delete.svg';
 import Edit from '../../assets/edit.svg';
 import { useState } from 'react';
 
-export default function RowItem({ id, date, weekday, description, category, value, input, del, active }) {
+export default function RowItem({ id, date, weekday, description, category, value, input, del, active, setId }) {
 
     const [deleteRow, setDeleteRow] = useState(false);
 
@@ -19,7 +19,10 @@ export default function RowItem({ id, date, weekday, description, category, valu
                 <img
                     src={Edit}
                     alt='edit input icon'
-                    onClick={() => active(true)}
+                    onClick={() => {
+                        active(true)
+                        setId(id)
+                    }}
                 />
 
                 <img
@@ -34,7 +37,7 @@ export default function RowItem({ id, date, weekday, description, category, valu
                         <button
                             type='button'
                             style={{ backgroundColor: '#3A9FF1' }}
-                            onClick={(e) => del(id, setDeleteRow(false))}
+                            onClick={() => del(id, setDeleteRow(false))}
                         >
                             Sim
                         </button>

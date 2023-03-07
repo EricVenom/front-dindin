@@ -3,13 +3,13 @@ import Close from '../../assets/close.svg';
 import { useEffect, useState } from 'react';
 import api from '../../services/api';
 
-export default function ModalAdd({ active, title, add }) {
+export default function ModalAdd({ active, title, add, id }) {
 
     async function handleSubmit(e) {
         e.preventDefault()
         if (add) {
             try {
-                const { data } = await api.post('/transacao', {
+                await api.post('/transacao', {
                     tipo: form.tipo,
                     descricao: form.descricao,
                     valor: form.valor,
@@ -20,15 +20,35 @@ export default function ModalAdd({ active, title, add }) {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
                 })
-                console.log(data)
+
+                setTimeout(() => {
+                    active(false)
+                }, 500);
             } catch (error) {
                 console.log(error)
             }
         }
 
         if (!add) {
-            console.log('editing registry')
-            //calls edit endpoint
+            try {
+                await api.put(`/transacao/${id}`, {
+                    tipo: form.tipo,
+                    descricao: form.descricao,
+                    valor: form.valor,
+                    data: form.data,
+                    categoria_id: form.categoria_id
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+
+                setTimeout(() => {
+                    active(false)
+                }, 500);
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 
