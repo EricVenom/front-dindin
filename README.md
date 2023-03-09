@@ -1,13 +1,5 @@
 ![](https://i.imgur.com/xG74tOh.png)
 
-# Desafio | Front-end - Módulo 3
-
-Após alguns meses trabalhando em projetos mais simples, você foi designado pelo seu Tech Lead para desenvolver uma aplicação que será apresentada a um cliente muito importante.
-
-Para o seu desenvolvimento foi liberado o layout que você pode encontrar no seguinte [link](https://www.figma.com/file/BwOAJkF8OeMON36TyFdhkj/DinDin-2.0?node-id=0%3A1).
-
-Além disso, você pode acessar o mapa mental com o mapeamento das funcionalidades clicando no seguinte [link](https://miro.com/app/board/uXjVPZkmV7c=/?share_link_id=902157252329).
-
 O sistema trata-se de uma aplicação para controle de finanças pessoais. As funcionalidades são:
 
 - Cadastro do usuário
@@ -22,56 +14,25 @@ O sistema trata-se de uma aplicação para controle de finanças pessoais. As fu
 - Editar perfil de usuário
 - Deslogar usuário
 
-## Detalhamento de Requisitos:
-
-# Pessoa A
-
 ### Cadastro de um novo usuário:
-
-Para cadastrar um novo usuário você terá que preencher o formulário na página de **sign-up**.
 
 ![](https://i.imgur.com/BZNNvti.png)
 
 \*É importante garantir que todos os campos estão preenchidos, além de que as senha e confirmação de senha são iguais.
 
-Ao clicar no botão **Cadastrar** você deverá enviar os dados do formulário para a **API** fazendo com que o sistema registre um novo usuário, caso dê certo o cadastro de um novo usuário, devemos redirecionar o usuário para a tela de **sign-in (login)**, assim ele já poderá se logar no sistema.
-
 ---
 
-# Pessoa A
-
 ### Login de usuário:
-
-1. Na página de login de usuário, temos um botão chamado **Cadastre-se**, esse botão deve levar o usuário para a tela de cadastrar um novo usuário **(sign-up)**:
-2. O formulário de login deve validar se os campos estão realmente preenchidos, se estiverem preenchidos você enviará uma requisição para a **API** para fazer o login desse usuário, é importante lembrar que existem informações como **token** e **userId** que precisam ser armazenadas no **localStorage** para que o usuário possa depois usar dentro da **área logada**.
-3. Caso o login dê certo o usuário deverá ser redirecionado para a tela principal (**main**) onde ele verá a listagem de suas transações.
-4. Caso o usuário esteja logado, nós devemos bloquear o acesso dele a página de login, sendo assim, somente quando o usuário estiver deslogado que poderá acessar a página **sign-in (login)**.
 
 ![](https://i.imgur.com/vvnluj6.png)
 
 ---
 
-# Pessoa B
-
 ### Página principal (main):
-
-Após o usuário fazer o login ele será redirecionado para a página principal, essa página só poderá ser acessada por usuários que estão logados na aplicação, caso contrário ao tentar acessar a página principal sem estar logado o usuário deverá ser redirecionado para a página de login (**sign-in**).
-
-Nessa página ele verá todas as informações:
-
-1. Header da aplicação com botões, logos e ícones.
-2. Tabela com a listagem de transações.
-3. Área de resumo, que traz as informações de entradas, saídas e saldos.
-4. Botão para adicionar uma nova transação.
-5. Botão para abrir área de filtros.
-
-Veja na imagem abaixo:
 
 ![](https://i.imgur.com/SYm8uuY.png)
 
 ---
-
-# Pessoa B
 
 ### Cadastro de uma nova transação:
 
@@ -83,18 +44,11 @@ Ao clicar no referido botão, um modal com a opção de adicionar informações 
 
 ![](https://i.imgur.com/qMegn2n.png)
 
-1. Nesse modal todas as informações devem ser preenchidas, lembrando que você pode adicionar uma `entrada` ou `saída` de dinheiro, por padrão o valor deve ser o de `saída`, caso o usuário queira adicionar um valor de entrada ele precisará clicar no botão **Entrada**.
-2. O **select** de **Categoria** deverá ser preenchido com as informações de categorias que a **API** traz, ou seja, as categorias devem ser listadas dentro do **select** com base em um **GET** na rota de **categoria** da **API.**
-
 \*Todos os campos são obrigatórios!
 
 Após o usuário clicar no botão **confirmar**, uma nova transação deve ser inserida e a tabela de listagem deve ser atualizada.
 
-É importante lembrar que quando adicionarmos uma nova transação, devemos atualizar também a área de **RESUMO**.
-
 ---
-
-# Pessoa B
 
 ### Editar uma transação:
 
@@ -114,8 +68,6 @@ Após validar os campos e o usuário clicar em confirmar, a transação deverá 
 
 ---
 
-# Pessoa B
-
 ### Excluir uma transação:
 
 Para excluir uma transação o usuário deverá clicar no ícone da lixeira, que se encontrará na tabela de listagem de transações:
@@ -129,8 +81,6 @@ Ao clicar nesse ícone, um "popup" irá aparecer para que o usuário confirme ou
 ![](https://i.imgur.com/Ohhk1lhm.png)
 
 ---
-
-# Pessoa B
 
 ### Listagem de transações:
 
@@ -149,25 +99,6 @@ Cada linha da tabela representa uma transação. Portanto cada botão representa
 
 ---
 
-# Pessoa A
-
-#### Cabeçalho da tabela:
-
-No cabeçalho da tabela deverá haver a opção de clicar e ordenar de forma **crescente** e **decrescente**, para isso basta o usuário clicar no nome da coluna, a cada clique a ordenação deve ser alterada entre **crescente** e **decrescente**.
-
-Somente a coluna **Data** poderá ser ordenada:
-
-Veja abaixo o ícone que representa que a coluna está sendo ordenada:
-
-- Ordenando a coluna data de forma crescente (do menor para o maior)
-  - ![](https://i.imgur.com/E0cR53u.png)
-
-**Importante:** Somente a coluna em ordenação deve conter o ícone.
-
----
-
-# Pessoa A
-
 ### Resumo das transações:
 
 O resumo das transações devem ser exibidos numa "box", onde teremos apenas 3 informações:
@@ -183,39 +114,6 @@ Veja na imagem abaixo, como deve ser o resumo;
 
 ---
 
-# Pessoa A
-
-### Filtros:
-
-A área de filtros por padrão é oculta, por isso você deve implementar a lógica para que quando o usuário clique no botão **Filtrar** a área de filtro seja exibida e quando clicar novamente seja ocultada, veja abaixo o botão que exibe/oculta a área de filtros:
-
-![](https://i.imgur.com/GCsalqk.png)
-
-Os filtros servem para dar granularidade aos dados, ou seja, para haver a possibilidade de exibir as transações conforme selecionamos requisitos para tal. Por exemplo, se disseremos que deve-se exibir apenas as transações da categoria **Depósito**, devemos listar na tabela somente as transações que pertencem àquela categoria.
-
-![](https://i.imgur.com/YzXbttF.png)
-
-Os filtros são cumulativos, ou seja, você pode filtrar por uma categoria ou por diversas categorias.
-
-O funcionamento dos filtros segue a seguinte ordem:
-
-1. Seleciona-se os filtros de categoria
-2. Após selecionar os filtros desejados, clica-se no botão **aplicar filtros**.
-
-Para limpar os filtros atuais, o usuário deverá clicar no botão **limpar filtros**
-
-**Importante:**
-
-1. Ao clicar em aplicar filtros sem nenhum filtro selecionado, o sistema deve exibir todas as transações disponíveis cadastradas.
-2. Ao clicar em limpar filtros, o sistema deve exibir todas as transações disponíveis cadastradas.
-
-Veja na imagem abaixo os botões:
-![](https://i.imgur.com/X43exDw.png)
-
----
-
-# Pessoa B
-
 ### Editar perfil de usuário:
 
 No header da aplicação existe um ícone:
@@ -224,18 +122,11 @@ No header da aplicação existe um ícone:
 
 Ao clicar nesse ícone, deverá ser exibido um modal para edição do usuário logado.
 
-1. O modal deverá abrir com os dados do usuário já carregados nele (menos senha e confirmação de senha)
-2. Após o usuário preencher os campos ele deverá clicar em **confirmar**, nesse momento você deve validar se os campos estão preenchidos, caso estejam, você deve enviar as informações que a **API** solicita para fazer a atualização do usuário logado.
-3. Após o perfil ter sido atualizado o modal deverá ser fechado.
-4. Ao abrir novamente o modal, os dados do usuário devem estar atualizados.
-
 Veja na imagem o modal já preenchido:
 
 ![](https://i.imgur.com/aWx7T9C.png)
 
 ---
-
-# Pessoa A
 
 ### Logout e nome de usuário
 
@@ -249,6 +140,5 @@ Veja na imagem abaixo os ícones:
 
 ---
 
-**LEMBRE-SE**: é melhor feito do que perfeito, mas não faça mal feito!!!
 
-###### tags: `front-end` `módulo 3` `React` `CSS` `desafio`
+###### tags: `front-end` `React` `CSS`
